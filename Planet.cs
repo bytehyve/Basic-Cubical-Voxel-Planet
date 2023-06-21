@@ -12,12 +12,12 @@ public class Planet
 {
     private readonly Plane[] planes;
 
-    public Planet(ushort planeSize, ushort planeHeight, float scale, float heightScale, float deformation) {
+    public Planet(ushort planeSize, ushort planeHeight, float scale, float deformation) {
         // Initializing the planes
         planes = new Plane[6];
 
         for (byte i = 0; i < 6; i++) {
-            planes[i] = new Plane(planeSize, planeHeight, (Direction)i, scale, heightScale, deformation);
+            planes[i] = new Plane(planeSize, planeHeight, (Direction)i, scale, deformation);
         }
     }
 

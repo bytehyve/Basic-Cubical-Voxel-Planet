@@ -14,7 +14,7 @@ public struct Voxel
     private VoxelStates state;
 
     // Constructor
-    public Voxel(int x, int y, int z, Direction side,  ushort gridSize, ushort gridHeight, float baseScale, float heightScale, float deformation, VoxelStates state = VoxelStates.Empty) {
+    public Voxel(int x, int y, int z, Direction side,  ushort gridSize, ushort gridHeight, float scale, float deformation, VoxelStates state = VoxelStates.Empty) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -22,11 +22,11 @@ public struct Voxel
         this.state = state;
             
         this.vertices = new Vector3[8];
-        this.vertices = CalculateVertices(gridSize, gridHeight, baseScale, heightScale, deformation);
+        this.vertices = CalculateVertices(gridSize, gridHeight, scale, deformation);
     }
 
     // Calculate vertices
-    private Vector3[] CalculateVertices(ushort gridSize, ushort gridHeight, float baseScale, float heightScale, float deformation) {
+    private Vector3[] CalculateVertices(ushort gridSize, ushort gridHeight, float scale, float deformation) {
         Vector3[] result = new Vector3[8];
         byte vertIndex = 0;
 
@@ -52,10 +52,10 @@ public struct Voxel
                     result[vertIndex] = new Vector3(localX, localY, localZ).normalized;
 
                     // Calculate height
-                    result[vertIndex] *= 1f + (this.y + y / 2f) / gridSize * heightScale;
+                    result[vertIndex] *= 1f + (this.y + y / 2f) / gridSize;
 
                     // Apply scale
-                    result[vertIndex] *= baseScale;
+                    result[vertIndex] *= (gridSize * scale * 2f) / Mathf.PI;
 
                     // Rotate to correct direction
                     Vector3 fromAxis = RotationAxes[(int)Direction.Up];

@@ -4,15 +4,14 @@ public class Generator : MonoBehaviour
 {
     [SerializeField] private ushort planeSize = 16;
     [SerializeField] private ushort planeHeight = 4;
-    [SerializeField] private float baseScale = 1f;
-    [SerializeField] private float heightScale = 1f;
+    [SerializeField] private float scale = 1f;
     [SerializeField, Range(0.0001f, 1f)] private float deformation = 0.75f;
 
     private Planet planet;
 
     // Update planet
     private void OnValidate() {
-        planet = new Planet(planeSize, planeHeight, baseScale, heightScale, deformation);
+        planet = new Planet(planeSize, planeHeight, scale, deformation);
     }
     
     // Draw vertices of planet
